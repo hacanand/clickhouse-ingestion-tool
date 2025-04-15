@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123"   # HTTP interface
+      - "9000:9000"   # Native protocol
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ingestion-api
+    ports:
+      - "8080:8080"
+    environment:
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_PORT=9000
+    depends_on:
+      - clickhouse
+
+volumes:
+  clickhouse-data:

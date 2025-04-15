@@ -1,0 +1,7 @@
+Frontend/node_modules
+Frontend/build
+Frontend/.env
+Frontend/.env.local
+Frontend/.env.development
+Frontend/.env.test
+.vscode
