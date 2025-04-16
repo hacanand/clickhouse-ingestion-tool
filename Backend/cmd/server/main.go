@@ -13,6 +13,8 @@ func main() {
     {
         api.POST("/clickhouse-to-file", handler.ClickHouseToFile)
         api.POST("/file-to-clickhouse", handler.FileToClickHouse)
+        api.POST("/get-columns", handler.GetColumns)
+
     }
 
 	r.Static("/", "./") // Add this line to serve CSV files from root

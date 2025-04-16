@@ -1,5 +1,5 @@
 # Start from Go base image
-FROM golang:1.21 AS builder
+FROM golang:1.22 AS builder
 
 WORKDIR /app
 COPY go.mod ./

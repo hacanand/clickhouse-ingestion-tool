@@ -2,11 +2,13 @@ module backend
 
 go 1.22.0
 
-require github.com/gin-gonic/gin v1.10.0
+require (
+	github.com/ClickHouse/clickhouse-go/v2 v2.34.0
+	github.com/gin-gonic/gin v1.10.0
+)
 
 require (
 	github.com/ClickHouse/ch-go v0.65.1 // indirect
-	github.com/ClickHouse/clickhouse-go/v2 v2.34.0 // indirect
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
