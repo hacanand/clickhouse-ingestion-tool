@@ -132,10 +132,11 @@ func LoginAndSetTokens(c *gin.Context) {
 // SetTokensAsCookies sets the Access and Refresh tokens as HTTP-only cookies
 func SetTokensAsCookies(c *gin.Context, accessToken, refreshToken string) {
 	// Set Access Token as a cookie (HTTP-only, Secure, SameSite=Strict)
-	c.SetCookie("access_token", accessToken, 3600, "/", "", true, true )  // 1 hour expiry
-
+	c.SetCookie("access_token", accessToken, 3600, "/", "", false, true )  // 1 hour expiry
+ 	// fmt.Println("access_token cookie set:", accessToken)
 	// Set Refresh Token as a cookie (HTTP-only, Secure, SameSite=Strict)
-	c.SetCookie("refresh_token", refreshToken, 30*24*60*60, "/", "", true, true) // 30 days expiry
+	c.SetCookie("refresh_token", refreshToken, 30*24*60*60, "/", "", false, true) // 30 days expiry
+	//  fmt.Println("refresh_token cookie set:", refreshToken)
 }
 func getEnv(key, defaultValue string) string {
 	if value, exists := os.LookupEnv(key); exists {
