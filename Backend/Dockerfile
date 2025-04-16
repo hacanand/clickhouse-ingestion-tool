@@ -1,5 +1,5 @@
 # Start from Go base image
-FROM golang:1.22 AS builder
+FROM golang:1.23 AS builder
 
 WORKDIR /app
 COPY go.mod ./
@@ -12,6 +12,7 @@ RUN go build -o server ./cmd/server
 # Small final image
 FROM debian:bullseye-slim
 
+RUN apt-get update && apt-get install -y libc6
 WORKDIR /app
 COPY --from=builder /app/server .
 

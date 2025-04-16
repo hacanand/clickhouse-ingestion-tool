@@ -1,13 +1,15 @@
 import { useState } from "react";
-import useToken from "./hooks/useToken";
+// import useToken from "./hooks/useToken";
 import TokenInput from "./components/TokenInput";
 import FileUpload from "./components/FileUpload";
 import CSVPreview from "./components/CSVPreview";
 import ColumnSelector from "./components/ColumnSelector";
 import { exportToCSV } from "./services/api";
+// import apiClient from "./utils/apiClient";
+import axios from "axios";
 
 function App() {
-  const [token, setToken] = useToken();
+  // const [token, setToken] = useToken();
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
   const [table, setTable] = useState("");
@@ -29,7 +31,7 @@ function App() {
     form.append("port", "9000");
     form.append("database", "default");
     form.append("user", "default");
-    form.append("jwt_token", token);
+    // form.append("jwt_token", token);
     form.append("table", table);
     selectedCols.forEach((col) => form.append("columns[]", col));
 
@@ -40,13 +42,25 @@ function App() {
       alert("Export failed: " + e.response?.data?.error);
     }
   };
-
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/login')
+      alert("Login successful");
+      console.log("Login response:", response);
+    } catch (error) {
+      alert("Login failed: " + error.response?.data?.error);
+      console.error("Login error:", error);
+    }
+  }
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="bg-white max-w-xl mx-auto p-6 rounded shadow">
         <h1 className="text-2xl font-bold mb-4">🔄 Ingestion Tool</h1>
 
-        <TokenInput token={token} setToken={setToken} />
+         <button
+          onClick={() => handleLogin()}
+          className="bg-red-600 text-white px-4 py-2 mb-4 rounded"
+        >Login</button>
 
         <hr className="my-4" />
         <h2 className="text-lg font-semibold mb-2">📤 Upload CSV</h2>

@@ -13,6 +13,9 @@ services:
         hard: 262144
     volumes:
       - clickhouse-data:/var/lib/clickhouse
+    environment:
+      - CLICKHOUSE_USER=admin           # Optional: Define if using a custom user
+      - CLICKHOUSE_PASSWORD=supersecret # Optional: Define if using a custom password
 
   api:
     build:
@@ -23,6 +26,8 @@ services:
       - "8080:8080"
     environment:
       - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_USER=admin
+      - CLICKHOUSE_PASSWORD=supersecret
       - CLICKHOUSE_PORT=9000
     depends_on:
       - clickhouse
