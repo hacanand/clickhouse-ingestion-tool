@@ -1,0 +1,9 @@
+- basic project overview and sample code 
+- after that resolve lots of bugs related to clickhouse and go app
+- write code for dockerfile and docker-compose file
+- write for basic ui in react js for given app
+
+resolve bug like
+
+how to set this /entrypoint.sh: neither CLICKHOUSE_USER nor CLICKHOUSE_PASSWORD is set, disabling network access for user 'default' and login using jwt token how to implement this 
+
